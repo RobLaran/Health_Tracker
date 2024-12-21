@@ -1,4 +1,4 @@
-Project #5 Health Tracker:
+# Project #5 Health Tracker:
 
 About:
     this project tracks user's health on such activity by logging, adding, or setting particular data related to health goals on their daily basis.
@@ -33,51 +33,51 @@ Features includes tracking calorie intake, track your body measurement, logging 
 CLI-Based Design:
 
 * Standby
-<!-- - tracking calorie intake functionalities:
-    # user inputs calories
-    # add it into the database
-    # calculates the calories into total and average calories(this week or last week)
+<!-- # tracking calorie intake functionalities:
+    - user inputs calories
+    - add it into the database
+    - calculates the calories into total and average calories(this week or last week)
 
     data model:
-        # date
-        # calories -->
+        - date
+        - calories -->
 
-- add bed time sleep:
-    # user inputs a bed time 
-    # add it into the database
-    # calculates the average and total
+# add bed time sleep:
+    - user inputs a bed time 
+    - add it into the database
+    - calculates the average and total
 
     data model:
-        # date
-        # day
-        # hours_of_sleep
+        - date
+        - day
+        - hours_of_sleep
 
-- monitoring water intake
-    # user inputs water intake
-    # add into the database
-    # calculates the total and average
+# monitoring water intake
+    - user inputs water intake
+    - add into the database
+    - calculates the total and average
 
     data model:
         # date
         # water_intake
         # water_intake goal
 
-- exercise routine
-    # user selects or add some exercise and inputs the estimated time of exercise
-    # add it into the database
-    # calculates the total and average 
+# exercise routine
+    - user selects or add some exercise and inputs the estimated time of exercise
+    - add it into the database
+    - calculates the total and average 
     
     data model:
-        # date
-        # calories_burned
+        - date
+        - calories_burned
 
-- body measruement
-    # user inputs weight in kg and height in cm
-    # add it into the database
-    # calculates the current data and average data and bmi
+# body measruement
+    - user inputs weight in kg and height in cm
+    - add it into the database
+    - calculates the current data and average data and bmi
 
     data model:
-        # date
-        # weight
-        # height
+        - date
+        - weight
+        - height
 
