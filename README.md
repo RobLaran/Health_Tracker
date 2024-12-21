@@ -1,8 +1,7 @@
 # Project #5 Health Tracker:
 
 About:
-    this project tracks user's health on such activity by logging, adding, or setting particular data related to health goals on their daily basis.
-Features includes tracking calorie intake, track your body measurement, logging exercise routine, monitoring water intake and estimating your bed time sleep. Data will be saved into the json file for permanent storage, so we can reload the saved data into the program. It has some session to temporarily keep the user logged in.
+    This project tracks user's health on such activity by logging, adding, or setting particular data related to health goals on their daily basis. Features includes tracking calorie intake, track your body measurement, logging exercise routine, monitoring water intake and estimating your bed time sleep. Data will be saved into the json file for permanent storage, so we can reload the saved data into the program. It has some session to temporarily keep the user logged in.
 
 
 # TODO
@@ -30,9 +29,8 @@ Features includes tracking calorie intake, track your body measurement, logging 
     - fixed empty form in user registration
 
     
-CLI-Based Design:
+# CLI-Based Design:
 
-* Standby
 <!-- # tracking calorie intake functionalities:
     - user inputs calories
     - add it into the database
