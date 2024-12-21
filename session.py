@@ -2,6 +2,7 @@ import os
 import socket
 from datetime import date as dt
 import json
+from encrypt import EncryptPassword
 
 class SessionManager:
     def __init__(self, database):
@@ -10,6 +11,7 @@ class SessionManager:
         self.userID = None
         self.active = False
         self.database = database
+        self.encrypt = EncryptPassword()
     
     def login(self):
         print('''--------------------------''')
@@ -17,7 +19,7 @@ class SessionManager:
         username = input('Enter username: ')
         password = input('Enter password: ')
         
-        if self.users and username in self.users and self.users[username] == password:
+        if self.users and username in self.users and self.encrypt.verify(self.users[username], password):
             print('logged in')
             self.user = username
             self.userID = self.database.getUserID(username)

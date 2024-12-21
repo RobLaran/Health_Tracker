@@ -1,7 +1,8 @@
-from database.db_connection import Database
+from database import Database
 from session import SessionManager
-from features.log_body_measurement import LogBodyMeasurement
-from features.log_water_intake import LogWaterIntake
+from features import LogBodyMeasurement
+from features import LogWaterIntake
+from encrypt import EncryptPassword
 
 class CLI:
     def __init__(self):
@@ -11,6 +12,7 @@ class CLI:
         self.session.loadSession()
         self.logbodymeasurement = LogBodyMeasurement(self.database)
         self.logwaterintake = LogWaterIntake(self.database, self.session.userID)
+        self.encrypt = EncryptPassword()
     
     def run(self):
         if self.session.active:
@@ -51,26 +53,29 @@ class CLI:
             username = str(input('Enter username: '))
             password = str(input('Enter password: '))
             rePassword = str(input('Enter confirm password: '))
+            encryptedPassword = self.encrypt.securePassword(password)
             
-            if self.session.users:
+            if self.session.users and username and password:
                 if not username in self.session.users and password == rePassword:
                     print('successfully registered')
                     
-                    self.database.addUser(username, password)
+                    self.database.addUser(username, encryptedPassword)
                     self.database.refresh()
                     self.session.loadUsers()
                     return
                 else:
                     print('unsuccessfully registered')
-            elif username and password == rePassword:
+                    return
+            elif username and password and password == rePassword:
                 print('successfully registered')
                 
-                self.database.addUser(username, password)
+                self.database.addUser(username, encryptedPassword)
                 self.database.refresh()
                 self.session.loadUsers(self.database.getUsers())
                 return
             else:
                 print('unsuccessfully registered')
+                return
                 
     def mainMenu(self, username):
         while True:

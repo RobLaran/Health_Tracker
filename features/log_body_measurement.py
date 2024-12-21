@@ -1,17 +1,13 @@
-from features.feature import FeatureInterface
+from features import FeatureInterface
 from tabulate import tabulate
-from datetime import date as dt
 
 class LogBodyMeasurement(FeatureInterface):
     def __init__(self, database):
         self.database = database
-        self.date = dt.today().isoformat()
         
     def log(self, userid, date, weight=0, height=0):
-        logs = self.database.getUserLogs(userid)
-        
         if len(date.strip()) == 0:
-            date = self.date
+            date = self.currentDate
         
         self.database.updateWeight(weight, userid, date)
         self.database.updateHeight(height, userid, date)

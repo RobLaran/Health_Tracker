@@ -1,6 +1,5 @@
 from .feature import FeatureInterface
 from tabulate import tabulate
-from datetime import date as dt
 
 class LogWaterIntake(FeatureInterface):
     def __init__(self, database, userid):
@@ -8,14 +7,11 @@ class LogWaterIntake(FeatureInterface):
         self.userid = userid
         self.hasGoal = False
         self.goal = 0
-        self.date = dt.today().isoformat()
         self.checkGoal()
     
     def log(self, date, waterml=0):
-        logs = self.database.getUserLogs(self.userid)
-        
         if len(date.strip()) == 0:
-            date = self.date
+            date = self.currentDate
             
         self.database.updateWaterIntake(waterml, self.userid, date)
 
@@ -23,7 +19,7 @@ class LogWaterIntake(FeatureInterface):
         wiLogs  = []
         
         logs = self.database.getUserLogs(self.userid)
-        
+        print(logs)
         if logs:
             for date in logs:
                 data = [date, logs[date]['water intake']]
@@ -41,8 +37,8 @@ class LogWaterIntake(FeatureInterface):
             print(f'Average water intake: {avg} ml')
             # goal feature
             
-            if self.hasGoal and self.date in logs:
-                currentIntake = logs[self.date]['water intake'] 
+            if self.hasGoal and self.currentDate in logs:
+                currentIntake = logs[self.currentDate]['water intake'] 
                 print(f'Goal: {self.goal} ml')
                 
                 if currentIntake != self.goal:
@@ -52,20 +48,21 @@ class LogWaterIntake(FeatureInterface):
             # display the requirement to reach the goal 
             
     def setGoal(self, goal):
-        self.goal = goal
-        self.database.updateWaterIntakeGoal(goal, self.userid, self.date)
+        if self.userid:
+            self.goal = goal
+            self.database.updateWaterIntakeGoal(goal, self.userid, self.currentDate)
         
     def checkGoal(self):
-        logs = self.database.getUserLogs(self.userid)
-        
-        if self.date in logs:
-            goal = logs[self.date]['water intake goal']
-            
-            if goal != 0:
-                self.hasGoal = True    
-                self.goal = goal
-            else:
-                self.hasGoal = False        
+        if self.userid:
+            logs = self.database.getUserLogs(self.userid)
+            if self.currentDate in logs:
+                goal = logs[self.currentDate]['water intake goal']
+                
+                if goal != 0:
+                    self.hasGoal = True    
+                    self.goal = goal
+                else:
+                    self.hasGoal = False        
             
     def calculateTotal(self):
         logs = self.database.getUserLogs(self.userid)
@@ -77,9 +74,11 @@ class LogWaterIntake(FeatureInterface):
         return round(total, 2)
 
     def calculateAvg(self, total, logs):
+        if not total:
+            return 0
+        
         numLogs = 0
         for date in logs:
-            print(logs[date]['water intake'])
             if logs[date]['water intake'] != 0:
                 numLogs += 1
         
