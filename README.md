@@ -32,7 +32,7 @@ Features includes tracking calorie intake, track your body measurement, logging 
     
 CLI-Based Design:
 
-# Standby
+* Standby
 <!-- - tracking calorie intake functionalities:
     # user inputs calories
     # add it into the database
