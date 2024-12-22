@@ -1,7 +1,6 @@
 from database import Database
 from session import SessionManager
-from features import LogBodyMeasurement
-from features import LogWaterIntake
+from features import LogBodyMeasurement, LogWaterIntake, LogBedTimeSleep
 from encrypt import EncryptPassword
 
 class CLI:
@@ -11,7 +10,8 @@ class CLI:
         self.session.loadUsers()
         self.session.loadSession()
         self.logbodymeasurement = LogBodyMeasurement(self.database)
-        self.logwaterintake = LogWaterIntake(self.database, self.session.userID)
+        self.logwaterintake = LogWaterIntake(self.database)
+        self.logbedtimesleep = LogBedTimeSleep(self.database)
         self.encrypt = EncryptPassword()
     
     def run(self):
@@ -21,28 +21,33 @@ class CLI:
             self.userAuth()
 
     def userAuth(self):
-       while True:
-            print('''--------------------------''')
-            print('User Authentication:')
-            print('''--------------------------
-    1) Log in
-    2) Register
-    3) Exit''')
-            
-            response = int(input('Select input: '))
-            
-            match response:
-                case 1:
-                    if self.loginUser():
-                        self.mainMenu(self.session.user)
-                    pass
-                case 2:
-                    self.registerUser()
-                    pass
-                case 3:
-                    print("exiting...")
-                    exit()
+        while True:
+                print('''--------------------------''')
+                print('User Authentication:')
+                print('''--------------------------
+        1) Log in
+        2) Register
+        3) Exit''')
                 
+                try:
+                    response = int(input('Select input: ').strip())
+                    
+                    match response:
+                        case 1:
+                            if self.loginUser():
+                                self.mainMenu(self.session.user)
+                            pass
+                        case 2:
+                            self.registerUser()
+                            pass
+                        case 3:
+                            print("exiting...")
+                            exit()
+                        case _:
+                            print('please select the correct option')
+                except ValueError:
+                    print('You entered incorrect value')
+                    
     def loginUser(self):
         return self.session.login()
     
@@ -50,9 +55,9 @@ class CLI:
        while True:
             print('''--------------------------''')
             print('Register User:')
-            username = str(input('Enter username: '))
-            password = str(input('Enter password: '))
-            rePassword = str(input('Enter confirm password: '))
+            username = str(input('Enter username: ')).strip()
+            password = str(input('Enter password: ')).strip()
+            rePassword = str(input('Enter confirm password: ')).strip()
             encryptedPassword = self.encrypt.securePassword(password)
             
             if self.session.users and username and password:
@@ -90,7 +95,7 @@ class CLI:
     5) Logout
     6) Exit''')
             try:
-                response = int(input('Select input: '))
+                response = int(input('Select input: ').strip())
                 
                 match response:
                     case 1:
@@ -120,13 +125,13 @@ class CLI:
     1) Add data
     2) View log
     3) Back''')
-            response = int(input("Select input: "))
+            response = int(input("Select input: ").strip())
             
             match response:
                 case 1:
-                    date = input("Enter date(yyyy-mm-dd): ")
-                    weight = int(input('Enter weight(in kg): '))
-                    height = int(input('Enter height(in cm): '))
+                    date = input("Enter date(yyyy-mm-dd): ").strip()
+                    weight = int(input('Enter weight(in kg): ').strip())
+                    height = int(input('Enter height(in cm): ').strip())
                     self.logbodymeasurement.log(self.session.userID, date, weight, height)
                 case 2:
                     self.logbodymeasurement.viewLogs(self.session.userID)
@@ -142,37 +147,35 @@ class CLI:
         2) View log
         3) Set goal
         4) Back''')
-            response = int(input("Select input: "))
+            response = int(input("Select input: ").strip())
                 
             match response:
                 case 1:
-                    date = input("Enter date(yyyy-mm-dd): ")
-                    waterml = int(input('Enter water intake(in ml): '))
+                    date = input("Enter date(yyyy-mm-dd): ").strip()
+                    waterml = int(input('Enter water intake(in ml): ').strip())
                 
-                    self.logwaterintake.log(date, waterml)
+                    self.logwaterintake.log(date, self.session.userID, waterml)
                 case 2:
-                    self.logwaterintake.viewLogs()
+                    self.logwaterintake.viewLogs(self.session.userID)
                 case 3:
                     if not self.logwaterintake.hasGoal:
-                        setGoal = input('Set goal? (y/n): ')
+                        setGoal = input('Set goal? (y/n): ').strip()
                         
                         if setGoal == 'y':
                             self.logwaterintake.hasGoal = True
-                            goal = int(input('Enter goal: '))
-                            self.logwaterintake.setGoal(goal)
+                            goal = int(input('Enter goal: ').strip())
+                            self.logwaterintake.setGoal(goal, self.session.userID)
                             print('New goal added')
                     else:
-                        goal = int(input('Edit goal(enter new goal): '))
+                        goal = int(input('Edit goal(enter new goal): ').strip())
                         
                         if goal == 0:
                             self.logwaterintake.hasGoal = False
-                            self.logwaterintake.setGoal(goal)
+                            self.logwaterintake.setGoal(goal, self.session.userID) 
                             print('Goal cleared')
                         else:
-                            self.logwaterintake.setGoal(goal)
+                            self.logwaterintake.setGoal(goal, self.session.userID)
                             print('New goal added')
-                        pass
-                    
                 case 4:
                     return
     
@@ -182,8 +185,18 @@ class CLI:
         print('''--------------------------
     1) Add data
     2) View log
-    3) Exit''')
-        pass
+    3) Back''')
+        
+        response = int(input("Select input: ").strip())
+        
+        match response:
+            case 1:
+                pass
+            case 2:
+                self.logbedtimesleep.viewLogs(self.session.userID)
+                pass
+            case 3:
+                return
     
     def logExerciseRoutine(self):
         print('''--------------------------''')
