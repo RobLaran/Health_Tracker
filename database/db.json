@@ -44,9 +44,38 @@
             "2024-12-21": {
                 "weight": 0,
                 "height": 0,
-                "water intake": 0,
+                "water intake": 500,
                 "water intake goal": 0,
+                "bed time": 534,
+                "calories burned": 0
+            },
+            "2024-12-22": {
+                "weight": 0,
+                "height": 0,
+                "water intake": 300,
+                "water intake goal": 1500,
                 "bed time": 0,
+                "calories burned": 0
+            },
+            "2024-12-23": {
+                "weight": 0,
+                "height": 0,
+                "water intake": 0,
+                "bed time": 714,
+                "calories burned": 0
+            },
+            "2024-12-19": {
+                "weight": 0,
+                "height": 0,
+                "water intake": 0,
+                "bed time": 285,
+                "calories burned": 0
+            },
+            "2024-12-20": {
+                "weight": 0,
+                "height": 0,
+                "water intake": 0,
+                "bed time": 372,
                 "calories burned": 0
             }
         }

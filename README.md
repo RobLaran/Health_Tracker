@@ -5,10 +5,6 @@ About:
 
 
 # TODO
-    - fix view logs in log water intake when first logging in
-    - do some test with the new created features
-        - test feature: log body measurement
-        - test feature: log water intake
     - create feature: logging bed time sleep
     - create feature: logging exercise routine
 
@@ -19,7 +15,7 @@ About:
     2024.12.20
     = logging water intake
         - work on viewing logs
-        # output 
+        - output 
             display table form
             summary of total water intake, average, and set goal
     - fixed where to put the checkGoal() function
@@ -28,19 +24,15 @@ About:
     - secured password(convert into hash)
     - fixed empty form in user registration
 
+    2024.12.22
+    - fixed view logs in log water intake when first logging in
+    - stripped input value when there is a leading or trailing whitespaces
+
     
 # CLI-Based Design:
-
-<!-- # tracking calorie intake functionalities:
-    - user inputs calories
-    - add it into the database
-    - calculates the calories into total and average calories(this week or last week)
-
     data model:
         - date
         - calories -->
-
-# add bed time sleep:
     - user inputs a bed time 
     - add it into the database
     - calculates the average and total
@@ -49,18 +41,14 @@ About:
         - date
         - day
         - hours_of_sleep
-
-# monitoring water intake
     - user inputs water intake
     - add into the database
     - calculates the total and average
 
     data model:
-        # date
-        # water_intake
-        # water_intake goal
-
-# exercise routine
+        - date
+        - water_intake
+        - water_intake goal
     - user selects or add some exercise and inputs the estimated time of exercise
     - add it into the database
     - calculates the total and average 
@@ -68,8 +56,6 @@ About:
     data model:
         - date
         - calories_burned
-
-# body measruement
     - user inputs weight in kg and height in cm
     - add it into the database
     - calculates the current data and average data and bmi
