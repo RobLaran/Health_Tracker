@@ -16,8 +16,8 @@ class SessionManager:
     def login(self):
         print('''--------------------------''')
         print('Login User:')
-        username = input('Enter username: ')
-        password = input('Enter password: ')
+        username = input('Enter username: ').strip()
+        password = input('Enter password: ').strip()
         
         if self.users and username in self.users and self.encrypt.verify(self.users[username], password):
             print('logged in')

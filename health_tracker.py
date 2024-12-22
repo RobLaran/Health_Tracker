@@ -115,7 +115,7 @@ class CLI:
                         print("exiting...")
                         exit()
             except ValueError:
-                print('please enter the right input')
+                print('please enter the right input or do not enter with a blank input')
     
     def logBodyMeasurement(self):
         while True:
@@ -191,6 +191,17 @@ class CLI:
         
         match response:
             case 1:
+                date = input("Enter date(yyyy-mm-dd): ").strip()
+                print("Enter time slept")
+                hrs = int(input("Enter hour/s: ").strip())
+                mins = int(input("Enter minutes/s(00-59): ").strip())
+                
+                if mins < 0 or mins > 59:
+                    print('enter the correct period of time')
+                    return
+                
+                timeslept = (hrs, mins)
+                self.logbedtimesleep.log(self.session.userID, timeslept, date)                
                 pass
             case 2:
                 self.logbedtimesleep.viewLogs(self.session.userID)

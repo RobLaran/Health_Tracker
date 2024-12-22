@@ -38,6 +38,33 @@ class Database:
             json.dump(data, file, indent=4)
             file.close()
             
+    """ log bed time sleep """
+    def updateTimeSlept(self, userid, timeslept, date):
+        data = self.getData()
+            
+        for key in data:
+            if key == userid:
+                logs = data[key]['data']
+                break
+            
+        if date in logs:
+            logs[date]['bed time'] = timeslept
+        else:
+            log = {
+                date: {
+                    "weight": 0,
+                    "height": 0,
+                    "water intake": 0,
+                    "bed time": timeslept,
+                    "calories burned": 0
+                }}
+            
+            self.updateUserLogs(log, userid)
+            return
+                
+        self.updateData(data)
+        pass
+
     """ log water intake """
     def updateWaterIntake(self, waterml, userid, date):
         data = self.getData()
