@@ -1,82 +1,47 @@
 {
-    "369294646461215844": {
+    "2180349911253399902": {
         "username": "rob",
         "password": "e20e37332f57ca9bd19ac1d0",
         "data": {
-            "2024-12-20": {
+            "2024-12-26": {
                 "weight": 0,
-                "height": 180,
-                "water intake": 1000,
-                "water intake goal": 1000,
-                "bed time": 0,
-                "calories burned": 0
+                "height": 0,
+                "water intake": 0,
+                "water intake goal": 0,
+                "bed time": 523,
+                "calories burned": 800,
+                "activity": "Pull ups",
+                "duration": 44
             },
-            "2024-12-19": {
+            "2024-12-25": {
                 "weight": 0,
-                "height": 180,
+                "height": 0,
                 "water intake": 0,
                 "water intake goal": 0,
                 "bed time": 0,
-                "calories burned": 0
-            },
-            "2024-12-15": {
-                "weight": 67,
-                "height": 180,
-                "water intake": 300,
-                "water intake goal": 0,
-                "bed time": 0,
-                "calories burned": 0
-            },
-            "2024-12-21": {
-                "weight": 66,
-                "height": 178,
-                "water intake": 500,
-                "water intake goal": 1500,
-                "bed time": 0,
-                "calories burned": 0
-            }
-        }
-    },
-    "7545390377766150714": {
-        "username": "blanche",
-        "password": "318716a15a46faf83fde5979",
-        "data": {
-            "2024-12-21": {
-                "weight": 0,
-                "height": 0,
-                "water intake": 500,
-                "water intake goal": 0,
-                "bed time": 534,
-                "calories burned": 0
-            },
-            "2024-12-22": {
-                "weight": 0,
-                "height": 0,
-                "water intake": 300,
-                "water intake goal": 1500,
-                "bed time": 0,
-                "calories burned": 0
+                "calories burned": 400,
+                "activity": "Pull ups",
+                "duration": 18
             },
             "2024-12-23": {
                 "weight": 0,
                 "height": 0,
                 "water intake": 0,
-                "bed time": 714,
-                "calories burned": 0
+                "water intake goal": 0,
+                "bed time": 0,
+                "calories burned": 1890,
+                "activity": "Running",
+                "duration": 92
             },
-            "2024-12-19": {
+            "2024-12-21": {
                 "weight": 0,
                 "height": 0,
                 "water intake": 0,
-                "bed time": 285,
-                "calories burned": 0
-            },
-            "2024-12-20": {
-                "weight": 0,
-                "height": 0,
-                "water intake": 0,
-                "bed time": 372,
-                "calories burned": 0
+                "water intake goal": 0,
+                "bed time": 0,
+                "calories burned": 200,
+                "activity": "Push ups",
+                "duration": 15
             }
         }
     }

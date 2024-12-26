@@ -1,6 +1,6 @@
 from database import Database
 from session import SessionManager
-from features import LogBodyMeasurement, LogWaterIntake, LogBedTimeSleep
+from features import LogBodyMeasurement, LogWaterIntake, LogBedTimeSleep, LogExerciseRoutine
 from encrypt import EncryptPassword
 
 class CLI:
@@ -12,6 +12,7 @@ class CLI:
         self.logbodymeasurement = LogBodyMeasurement(self.database)
         self.logwaterintake = LogWaterIntake(self.database)
         self.logbedtimesleep = LogBedTimeSleep(self.database)
+        self.logexerciseroutine = LogExerciseRoutine(self.database)
         self.encrypt = EncryptPassword()
     
     def run(self):
@@ -76,7 +77,7 @@ class CLI:
                 
                 self.database.addUser(username, encryptedPassword)
                 self.database.refresh()
-                self.session.loadUsers(self.database.getUsers())
+                self.session.loadUsers()
                 return
             else:
                 print('unsuccessfully registered')
@@ -180,42 +181,61 @@ class CLI:
                     return
     
     def logBedTime(self):
-        print('''--------------------------''')
-        print('Log bed time:')
-        print('''--------------------------
-    1) Add data
-    2) View log
-    3) Back''')
-        
-        response = int(input("Select input: ").strip())
-        
-        match response:
-            case 1:
-                date = input("Enter date(yyyy-mm-dd): ").strip()
-                print("Enter time slept")
-                hrs = int(input("Enter hour/s: ").strip())
-                mins = int(input("Enter minutes/s(00-59): ").strip())
-                
-                if mins < 0 or mins > 59:
-                    print('enter the correct period of time')
+        while True:
+            print('''--------------------------''')
+            print('Log bed time:')
+            print('''--------------------------
+        1) Add data
+        2) View log
+        3) Back''')
+            
+            response = int(input("Select input: ").strip())
+            
+            match response:
+                case 1:
+                    date = input("Enter date(yyyy-mm-dd): ").strip()
+                    print("Enter time slept")
+                    hrs = int(input("Enter hour/s: ").strip())
+                    mins = int(input("Enter minutes/s(00-59): ").strip())
+                    
+                    if mins < 0 or mins > 59:
+                        print('enter the correct period of time')
+                        return
+                    
+                    timeslept = (hrs, mins)
+                    self.logbedtimesleep.log(self.session.userID, timeslept, date)                
+                case 2:
+                    self.logbedtimesleep.viewLogs(self.session.userID)
+                case 3:
                     return
-                
-                timeslept = (hrs, mins)
-                self.logbedtimesleep.log(self.session.userID, timeslept, date)                
-                pass
-            case 2:
-                self.logbedtimesleep.viewLogs(self.session.userID)
-                pass
-            case 3:
-                return
     
     def logExerciseRoutine(self):
-        print('''--------------------------''')
-        print('Log exercise routine:')
-        print('''--------------------------
-    1) Add data
-    2) View log
-    3) Exit''')
-        pass
+         while True:
+            print('''--------------------------''')
+            print('Log exercise routine:')
+            print('''--------------------------
+        1) Add data
+        2) View log
+        3) Back''')
+            
+            response = int(input("Select input: ").strip())
+            
+            match response:
+                case 1:
+                    date = input("Enter date(yyyy-mm-dd): ").strip()
+                    activity = input("Activity: ").strip()
+                    print('Duration')
+                    hrs = int(input("Enter hour/s: ").strip())
+                    mins = int(input("Enter minutes/s(00-59): ").strip())
+                    duration = (hrs, mins)
+                    calBurned = int(input("Calories burned: "))
+
+                    self.logexerciseroutine.log(calBurned, activity, duration,
+                                                date, self.session.userID)
+                case 2:
+                    self.logexerciseroutine.viewLogs(self.session.userID)
+                    pass
+                case 3:
+                    return
     
     

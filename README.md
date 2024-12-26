@@ -5,8 +5,9 @@ About:
 
 
 # TODO
-    - create feature: logging bed time sleep
     - create feature: logging exercise routine
+        *   add data: date, type of activity, duration in hrs and mins, and calories burned
+        *   view logs: a table format consisting all data, an average of burned calories, and a list of activities  added
 
 # DONE
     2024.12.18
@@ -27,6 +28,9 @@ About:
     2024.12.22
     - fixed view logs in log water intake when first logging in
     - stripped input value when there is a leading or trailing whitespaces
+
+    2024.12.26
+    - created feature: logging bed time sleep
 
     
 # CLI-Based Design:

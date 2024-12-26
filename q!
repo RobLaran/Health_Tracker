@@ -1,0 +1,63 @@
+[33mcommit 6f219feb5d9fede67c0f5071d7dc7b34342842ff[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Rob <160157653+RobLaran@users.noreply.github.com>
+Date:   Mon Dec 23 02:18:04 2024 +0800
+
+    README.md changes
+
+[33mcommit 9598aff223f9398c4ffcbec900020205ebb4feb2[m
+Merge: 490519b ddf2b26
+Author: RobLaran <160157653+RobLaran@users.noreply.github.com>
+Date:   Mon Dec 23 02:12:08 2024 +0800
+
+    Merge pull request #1 from RobLaran/master
+    
+    Master
+
+[33mcommit ddf2b26380164d5bb90bc86a0da4f4d7386746a8[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: 42671e7 490519b
+Author: RobLaran <160157653+RobLaran@users.noreply.github.com>
+Date:   Mon Dec 23 02:11:55 2024 +0800
+
+    Merge branch 'main' into master
+
+[33mcommit 42671e7c6031c34652a96f0319a06c516a88d585[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Rob <160157653+RobLaran@users.noreply.github.com>
+Date:   Mon Dec 23 02:02:10 2024 +0800
+
+    created the third feature: tracking bed time slept
+
+[33mcommit 30deff5c40b6bdaf7faab4d34282cab2834ebe89[m
+Author: Rob <160157653+RobLaran@users.noreply.github.com>
+Date:   Sun Dec 22 19:35:53 2024 +0800
+
+    - fixed view logs in log water intake when first logging in, - stripped input value when there is a leading or trailing whitespaces
+
+[33mcommit 490519b2ded831bfefa36e6fa9422c4f573a7b10[m
+Author: RobLaran <160157653+RobLaran@users.noreply.github.com>
+Date:   Sat Dec 21 15:47:03 2024 +0800
+
+    Update README.md
+
+[33mcommit 88adb56ef19592e52991e34583f08763f884fff1[m
+Author: RobLaran <160157653+RobLaran@users.noreply.github.com>
+Date:   Sat Dec 21 15:46:08 2024 +0800
+
+    Update README.md
+
+[33mcommit 2d9090eef26c845b21428849649f55edabd04cb5[m
+Author: RobLaran <160157653+RobLaran@users.noreply.github.com>
+Date:   Sat Dec 21 15:43:50 2024 +0800
+
+    Update README.md
+
+[33mcommit 1a2c4855ddfdc44559a33682b28017a85940db88[m
+Author: Rob <160157653+RobLaran@users.noreply.github.com>
+Date:   Sat Dec 21 15:38:17 2024 +0800
+
+    -securing password by converting into hash, -fixed user registration when entering an empty form
+
+[33mcommit bd818288659c165775ddc09a64e627e4f538e9e7[m
+Author: Rob <160157653+RobLaran@users.noreply.github.com>
+Date:   Sat Dec 21 00:30:52 2024 +0800
+
+    first commit to add the project
