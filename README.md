@@ -43,38 +43,45 @@ About:
 
     
 # CLI-Based Design:
-    data model:
-        - date
-        - calories -->
-    - user inputs a bed time 
-    - add it into the database
-    - calculates the average and total
+    - add bed time sleep:
+        - user inputs a bed time 
+        - add it into the database
+        - calculates the average and total
 
-    data model:
-        - date
-        - day
-        - hours_of_sleep
-    - user inputs water intake
-    - add into the database
-    - calculates the total and average
+        data model:
+            - date
+            - day
+            - hours_of_sleep
 
-    data model:
-        - date
-        - water_intake
-        - water_intake goal
-    - user selects or add some exercise and inputs the estimated time of exercise
-    - add it into the database
-    - calculates the total and average 
-    
-    data model:
-        - date
-        - calories_burned
-    - user inputs weight in kg and height in cm
-    - add it into the database
-    - calculates the current data and average data and bmi
+    - monitoring water intake
+        - user inputs water intake
+        - add into the database
+        - calculates the total and average
 
-    data model:
-        - date
-        - weight
-        - height
+        data model:
+            - date
+            - water_intake
+            - water_intake goal
+
+    - exercise routine
+        - user selects or add some exercise and inputs the estimated time of exercise
+        - add it into the database
+        - calculates the total and average 
+        
+        data model:
+            - date
+            - calories_burned
+
+    - body measruement
+        - user inputs weight in kg and height in cm
+        - add it into the database
+        - calculates the current data and average data and bmi
+
+        data model:
+            - date
+            - weight
+            - height
+
+    - summary
+        - displays all summaries
 
