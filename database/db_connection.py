@@ -16,7 +16,7 @@ class Database:
                 
                 logs.update(newLog)
                 
-                self.updateData(data)
+                self.updateLog(data)
                 return
         
     def getUserLogs(self, userid):
@@ -33,13 +33,12 @@ class Database:
             file.close()
             return data
         
-    def updateData(self, data):
+    def updateLog(self, data):
         with open('database/db.json', 'w') as file:
             json.dump(data, file, indent=4)
             file.close()
             
-    """ log bed time sleep """
-    def updateTimeSlept(self, userid, timeslept, date):
+    def updateData(self, dataname, value, date, userid):
         data = self.getData()
             
         for key in data:
@@ -48,22 +47,41 @@ class Database:
                 break
             
         if date in logs:
-            logs[date]['bed time'] = timeslept
+            logs[date][f"{dataname}"] = value
         else:
-            log = {
-                date: {
-                    "weight": 0,
-                    "height": 0,
-                    "water intake": 0,
-                    "bed time": timeslept,
-                    "calories burned": 0
-                }}
+            match dataname:
+                case 'weight':
+                    log = self.createData(date=date, weight=value)
+
+                case 'height':
+                    log = self.createData(date=date, height=value)
+
+                case 'water intake':
+                    log = self.createData(date=date, waterIntake=value)
+
+                case 'water intake goal':
+                    log = self.createData(date=date, waterIntakeGoal=value)
+
+                case 'bed time':
+                    log = self.createData(date=date, timeSlept=value)
+                    
+                case 'calories burned':
+                    log = self.createData(date=date, caloriesBurned=value)
+                    
+                case 'activity':
+                    log = self.createData(date=date, activity=value)
+                    
+                case 'duration':
+                    log = self.createData(date=date, duration=value)
             
             self.updateUserLogs(log, userid)
             return
                 
-        self.updateData(data)
-        pass
+        self.updateLog(data)
+            
+    """ log bed time sleep """
+    def updateTimeSlept(self, userid, timeslept, date):
+        self.updateData('bed time', timeslept, date, userid)
 
     """ log water intake """
     def updateWaterIntake(self, waterml, userid, date):
@@ -77,20 +95,12 @@ class Database:
         if date in logs:
             logs[date]['water intake'] = waterml
         else:
-            log = {
-                date: {
-                    "weight": 0,
-                    "height": 0,
-                    "water intake": waterml,
-                    'water intake goal' : 0,
-                    "bed time": 0,
-                    "calories burned": 0
-                }}
+            log = self.createData(date=date,waterIntake=waterml)
             
             self.updateUserLogs(log, userid)
             return
                 
-        self.updateData(data)   
+        self.updateLog(data)   
         
     def updateWaterIntakeGoal(self, waterml, userid, date):
         data = self.getData()
@@ -104,22 +114,14 @@ class Database:
         if date in logs:
             logs[date]['water intake goal'] = waterml
         else:
-            log = {
-                date: {
-                    "weight": 0,
-                    "height": 0,
-                    "water intake": 0,
-                    'water intake goal' : waterml,
-                    "bed time": 0,
-                    "calories burned": 0
-                }}
+            log = self.createData(date=date,waterIntakeGoal=waterml)
             
             self.updateUserLogs(log, userid)
             return
                 
-        self.updateData(data) 
+        self.updateLog(data) 
 
-    """ for updating data in body measurement   """  
+    """ log body measurement """  
     def updateWeight(self, weight, userid, date):
         data = self.getData()
             
@@ -131,19 +133,12 @@ class Database:
         if date in logs:
             logs[date]['weight'] = weight
         else:
-            log = {
-                date: {
-                    "weight": weight,
-                    "height": 0,
-                    "water intake": 0,
-                    "bed time": 0,
-                    "calories burned": 0
-                }}
+            log = self.createData(date=date, weight=weight)
             
             self.updateUserLogs(log, userid)
             return
                 
-        self.updateData(data)
+        self.updateLog(data)
     
     def updateHeight(self, height, userid, date):
         data = self.getData()
@@ -156,19 +151,22 @@ class Database:
         if date in logs:
             logs[date]['height'] = height
         else:
-            log = {
-                date: {
-                    "weight": 0,
-                    "height": height,
-                    "water intake": 0,
-                    "bed time": 0,
-                    "calories burned": 0
-                }}
+            log = self.createData(date=date, height=height)
             
             self.updateUserLogs(log, userid)
             return
                 
-        self.updateData(data)
+        self.updateLog(data)
+        
+    """ log exercise routine """
+    def updateCalories(self, calBurned, date, userid):
+        self.updateData('calories burned', calBurned, date, userid)
+        
+    def updateActivity(self, activity, date, userid):
+        self.updateData('activity', activity, date, userid)
+        
+    def updateDuration(self, duration, date, userid):
+        self.updateData('duration', duration, date, userid)
         
         
     """ main database functionalities """
@@ -185,24 +183,17 @@ class Database:
         date_today = dt.today().isoformat()
         
         user = {abs(hash(username)) : 
-                                {'username' : username,
-                                    'password' : password,
-                                    'data' : {
-                                        date_today : {
-                                            'weight' : 0,
-                                            'height' : 0,
-                                            'water intake' : 0,
-                                            'water intake goal' : 0,
-                                            'bed time' : 0,
-                                            'calories burned' : 0
-                            }}}}
+                    {'username' : username,
+                        'password' : password,
+                        'data' : self.createData(date=date_today)
+                    }}
         return user
     
     def addUser(self, username, password):
         user = self.generateUser(username, password)
         data = self.getData()
         data.update(user)
-        self.updateData(data)
+        self.updateLog(data)
     
     def loadDB(self):
         data = self.getData()
@@ -221,6 +212,22 @@ class Database:
         for key in data:
             if data[key]['username'] == username:
                 return key
+            
+    def createData(self, date=None, weight=0, height=0, waterIntake=0, waterIntakeGoal=0,
+             timeSlept=0, caloriesBurned=0, activity=None, duration=0):
+        data = {
+                date: {
+                    "weight": weight,
+                    "height": height,
+                    "water intake": waterIntake,
+                    'water intake goal' : waterIntakeGoal,
+                    "bed time": timeSlept,
+                    "calories burned": caloriesBurned,
+                    "activity": activity,
+                    "duration": duration
+                }}
+        
+        return data
             
         
        
