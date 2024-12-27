@@ -42,6 +42,36 @@
                 "calories burned": 200,
                 "activity": "Push ups",
                 "duration": 15
+            },
+            "2024-12-27": {
+                "weight": 0,
+                "height": 0,
+                "water intake": 0,
+                "water intake goal": 0,
+                "bed time": 0,
+                "calories burned": 400,
+                "activity": "",
+                "duration": 24
+            },
+            "2024-12-28": {
+                "weight": 68,
+                "height": 166,
+                "water intake": 1200,
+                "water intake goal": 0,
+                "bed time": 0,
+                "calories burned": 0,
+                "activity": null,
+                "duration": 0
+            },
+            "2024-12-24": {
+                "weight": 0,
+                "height": 0,
+                "water intake": 900,
+                "water intake goal": 0,
+                "bed time": 0,
+                "calories burned": 0,
+                "activity": null,
+                "duration": 0
             }
         }
     }

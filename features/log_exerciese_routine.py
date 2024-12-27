@@ -71,13 +71,14 @@ class LogExerciseRoutine(FeatureInterface):
         activities = set()
         
         for date in logs:
-            activities.add(logs[date]['activity'])
+            if logs[date]['activity']:
+                activities.add(logs[date]['activity'])
 
         return activities
         
     def activityList(self, userid):
         logs = self.database.getUserLogs(userid)
         
-        list = {'Acitivites' : self.loadActivities(logs)}
+        list = {'Activites' : self.loadActivities(logs)}
         
         print(tabulate(list, headers='keys', tablefmt='grid'))

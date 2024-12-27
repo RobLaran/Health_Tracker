@@ -3,11 +3,8 @@
 About:
     This project tracks user's health on such activity by logging, adding, or setting particular data related to health goals on their daily basis. Features includes tracking calorie intake, track your body measurement, logging exercise routine, monitoring water intake and estimating your bed time sleep. Data will be saved into the json file for permanent storage, so we can reload the saved data into the program. It has some session to temporarily keep the user logged in.
 
-
 # TODO
-    - create feature: logging exercise routine
-        *   add data: date, type of activity, duration in hrs and mins, and calories burned
-        *   view logs: a table format consisting all data, an average of burned calories, and a list of activities  added
+    
 
 # DONE
     2024.12.18
@@ -31,6 +28,18 @@ About:
 
     2024.12.26
     - created feature: logging bed time sleep
+    - created feature: logging exercise routine
+        *   add data: date, type of activity, duration in hrs and mins, and calories burned
+        *   view logs: a table format consisting all data, an average of burned calories, and a list of activities  added
+
+    2024.12.28
+    - added view summary option in main menu: summary option shows all the summary of data
+        * calculate the monthly average weight
+        * calculate the monthly average height
+        * calculate the monthly average time slept
+        * calculate the monthly average calories burned
+        * calculate the monthly total calories burned
+        * calculate the monthly total water intake
 
     
 # CLI-Based Design:

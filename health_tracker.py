@@ -1,6 +1,6 @@
 from database import Database
 from session import SessionManager
-from features import LogBodyMeasurement, LogWaterIntake, LogBedTimeSleep, LogExerciseRoutine
+from features import LogBodyMeasurement, LogWaterIntake, LogBedTimeSleep, LogExerciseRoutine, Summary
 from encrypt import EncryptPassword
 
 class CLI:
@@ -13,6 +13,7 @@ class CLI:
         self.logwaterintake = LogWaterIntake(self.database)
         self.logbedtimesleep = LogBedTimeSleep(self.database)
         self.logexerciseroutine = LogExerciseRoutine(self.database)
+        self.summary = Summary(self.database)
         self.encrypt = EncryptPassword()
     
     def run(self):
@@ -93,8 +94,9 @@ class CLI:
     2) Log water intake
     3) Log bed time sleep
     4) Log exercise routine
-    5) Logout
-    6) Exit''')
+    5) View summary
+    6) Logout
+    7) Exit''')
             try:
                 response = int(input('Select input: ').strip())
                 
@@ -108,11 +110,13 @@ class CLI:
                     case 4:
                         self.logExerciseRoutine()
                     case 5:
+                        self.summary.summaries(self.session.userID)
+                    case 6:
                         self.session.logout()
                         self.run()
                         print('logging out...')
                         return
-                    case 6:
+                    case 7:
                         print("exiting...")
                         exit()
             except ValueError:
